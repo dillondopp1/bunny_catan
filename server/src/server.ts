@@ -6,16 +6,13 @@ import type { ServerToClientEvents, ClientToServerEvents } from './game/types';
 import { RoomManager } from './lobby/RoomManager';
 
 const app = express();
-const ALLOWED_ORIGINS = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(',')
-  : ['http://localhost:5173', 'http://localhost:5174'];
 
-app.use(cors({ origin: ALLOWED_ORIGINS }));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
-  cors: { origin: ALLOWED_ORIGINS, methods: ['GET', 'POST'] },
+  cors: { origin: '*', methods: ['GET', 'POST'] },
 });
 
 const rooms = new RoomManager();
