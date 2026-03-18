@@ -1,0 +1,10 @@
+{
+  "name": "bunny-catan",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm --prefix server install && npm --prefix server start"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
