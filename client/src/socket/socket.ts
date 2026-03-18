@@ -65,3 +65,11 @@ export function joinRoom(roomCode: string, playerName: string) {
 export function sendAction(action: GameAction) {
   getSocket().emit('game_action', action);
 }
+
+export function leaveGame() {
+  if (socket) {
+    socket.disconnect();
+    socket = null;
+  }
+  useGameStore.getState().reset();
+}

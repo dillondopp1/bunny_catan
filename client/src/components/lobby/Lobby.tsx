@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { leaveGame } from '../../socket/socket';
 
 interface Props {
   onCreateRoom: (name: string) => void;
@@ -35,6 +36,11 @@ export default function Lobby({ onCreateRoom, onJoinRoom, connecting, error }: P
     cursor: 'pointer',
     width: '100%',
     transition: 'background 0.15s',
+  };
+
+  const handleBack = () => {
+    leaveGame();
+    setMode('menu');
   };
 
   return (
@@ -103,7 +109,7 @@ export default function Lobby({ onCreateRoom, onJoinRoom, connecting, error }: P
               {connecting ? 'Connecting...' : '🐾 Create Room'}
             </button>
             <button style={{ ...btnStyle, background: 'transparent', border: 'none', color: '#808080', fontSize: 14 }}
-              onClick={() => setMode('menu')}>
+              onClick={handleBack}>
               ← Back
             </button>
           </div>
@@ -133,7 +139,7 @@ export default function Lobby({ onCreateRoom, onJoinRoom, connecting, error }: P
               {connecting ? 'Joining...' : '🚪 Join Room'}
             </button>
             <button style={{ ...btnStyle, background: 'transparent', border: 'none', color: '#808080', fontSize: 14 }}
-              onClick={() => setMode('menu')}>
+              onClick={handleBack}>
               ← Back
             </button>
           </div>

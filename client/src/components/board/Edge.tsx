@@ -29,7 +29,7 @@ export default function Edge({ edge, clickable, onClick }: Props) {
   // Direction vector for road orientation
   const dx = b.x - a.x;
   const dy = b.y - a.y;
-  const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
 
   if (road) {
     // Draw a log/stick style road

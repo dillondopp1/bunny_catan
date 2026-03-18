@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGameStore } from './store/gameStore';
-import { createRoom, joinRoom, sendAction } from './socket/socket';
+import { createRoom, joinRoom, sendAction, leaveGame } from './socket/socket';
 import Lobby from './components/lobby/Lobby';
 import HexGrid from './components/board/HexGrid';
 import ResourceHand from './components/ui/ResourceHand';
@@ -50,9 +50,21 @@ export default function App() {
         borderBottom: '1px solid #4a3520',
       }}>
         <span style={{ fontSize: 22, fontWeight: 900, color: '#f5e6c8' }}>🐰 Bunny Catan</span>
-        <span style={{ fontSize: 13, color: '#b09070' }}>
-          Room: <strong style={{ color: '#ffd700' }}>{roomCode}</strong>
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span style={{ fontSize: 13, color: '#b09070' }}>
+            Room: <strong style={{ color: '#ffd700' }}>{roomCode}</strong>
+          </span>
+          <button
+            onClick={leaveGame}
+            style={{
+              padding: '4px 12px', background: 'transparent',
+              color: '#808080', border: '1px solid #555',
+              borderRadius: 6, fontSize: 12, cursor: 'pointer',
+            }}
+          >
+            Leave
+          </button>
+        </div>
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────────── */}
@@ -93,6 +105,16 @@ export default function App() {
                   🚀 Start Game
                 </button>
               )}
+              <button
+                onClick={leaveGame}
+                style={{
+                  padding: '8px 20px', background: 'transparent',
+                  color: '#808080', border: '1px solid #555',
+                  borderRadius: 8, fontSize: 14, cursor: 'pointer',
+                }}
+              >
+                ← Leave Room
+              </button>
             </div>
           ) : (
             <HexGrid
